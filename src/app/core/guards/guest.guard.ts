@@ -8,7 +8,7 @@ export const guestGuard: CanActivateFn = async (route, state) => {
   const authenticated = await storageService.isAuthenticated();
 
   if (authenticated) {
-    router.navigate(['/tabs/profile']);
+    router.navigate(['/games']);
     return false;
   } else {
     return true;
