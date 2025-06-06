@@ -60,7 +60,9 @@ export class UserModulePage implements OnInit {
     this.filteredUsers = this.users.filter((user => user.username.toLowerCase().includes(this.searchQuery.toLowerCase())));
   }
 
-  goToUpdatePage(userId: number) {}
+  goToUpdatePage(userId: number) {
+    this.router.navigate(['/users/update', userId]);
+  }
 
   delete(userId: number) {
     this.apiService.deleteUser(userId).subscribe({
