@@ -1,17 +1,77 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonList, IonItem, IonLabel, IonThumbnail, IonSearchbar, IonRefresher, IonRefresherContent, IonIcon, IonItemSliding, IonItemOption, IonItemOptions } from '@ionic/angular/standalone';
+import { TranslateModule } from '@ngx-translate/core';
+import { Platform } from 'src/app/core/interfaces/platform';
+import { ApiService } from 'src/app/core/services/api.service';
+import { Router } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { create, trashSharp } from 'ionicons/icons';
 
 @Component({
   selector: 'app-platform-module',
   templateUrl: './platform-module.page.html',
   styleUrls: ['./platform-module.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton, TranslateModule, IonList, IonLabel, IonItem, IonThumbnail, IonSearchbar, IonRefresher, IonRefresherContent, IonIcon, IonItemSliding, IonItemOption, IonItemOptions]
 })
 export class PlatformModulePage implements OnInit {
-  constructor() {}
+  /* Flag for the platforms' array */
+  private platforms: Platform[] = [];
+  /* Flag for search query */
+  public searchQuery: string = "";
+  /* Flag for filtered platforms */
+  public filteredPlatforms: Platform[] = [];
 
-  ngOnInit() {}
+  /**
+   * Constructor
+   * @param apiService    API Service
+   * @param router        Router
+   */
+  constructor(
+    private apiService: ApiService,
+    private router: Router
+  ) {
+    addIcons({ trashSharp, create });
+  }
+
+  ngOnInit() {
+    this.loadData();
+  }
+
+  doRefresh(event: any) {
+    this.loadData();
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
+  }
+
+  /**
+   * Loads platforms from db
+   */
+  loadData() {
+    this.apiService.getPlatforms().subscribe(
+      (data) => {
+        this.platforms = data;
+        this.filteredPlatforms = data;
+      }
+    );
+  }
+
+  filterPlatforms() {
+    this.filteredPlatforms = this.platforms.filter((platform => platform.name.toLowerCase().includes(this.searchQuery.toLocaleLowerCase())));
+  }
+
+  goToUpdatePage(platformId: number) {}
+
+  delete(platformId: number) {
+    this.apiService.deletePlatform(platformId).subscribe({
+      next: (res) => {
+        this.router.navigate(['/platforms']).then(() => {
+          window.location.reload();
+        });
+      }
+    });
+  }
 }
