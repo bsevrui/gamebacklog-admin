@@ -1,0 +1,7 @@
+{
+  "name": "gamebacklog-admin",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
