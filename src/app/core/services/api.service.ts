@@ -77,6 +77,10 @@ export class ApiService {
     return this.http.get<Platform>(environment.apiBaseUrl+'platforms/'+platformId);
   }
 
+  deletePlatform(platformId: number) {
+    return this.http.delete(environment.apiBaseUrl+'platforms/'+platformId);
+  }
+
   /**
    * Get User
    * @param userId user's id
