@@ -31,7 +31,7 @@
           <ion-item-option color="warning">
             <ion-icon slot="icon-only" name="create"></ion-icon>
           </ion-item-option>
-          <ion-item-option color="danger">
+          <ion-item-option color="danger" (click)="delete(game.id)">
             <ion-icon slot="icon-only" name="trash-sharp"></ion-icon>
           </ion-item-option>
         </ion-item-options>

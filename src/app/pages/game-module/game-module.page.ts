@@ -5,7 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton,
 import { TranslateModule } from '@ngx-translate/core';
 import { Game } from 'src/app/core/interfaces/game';
 import { ApiService } from 'src/app/core/services/api.service';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { create, trashSharp } from 'ionicons/icons';
 
@@ -14,7 +14,7 @@ import { create, trashSharp } from 'ionicons/icons';
   templateUrl: './game-module.page.html',
   styleUrls: ['./game-module.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton, TranslateModule, IonList, IonItem, IonLabel, IonThumbnail, RouterLink, IonSearchbar, IonRefresher, IonRefresherContent, IonItemSliding, IonItemOption, IonItemOptions, IonIcon]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton, TranslateModule, IonList, IonItem, IonLabel, IonThumbnail, IonSearchbar, IonRefresher, IonRefresherContent, IonItemSliding, IonItemOption, IonItemOptions, IonIcon]
 })
 export class GameModulePage implements OnInit {
   /* Flag for the games' array */
@@ -27,8 +27,12 @@ export class GameModulePage implements OnInit {
   /**
    * Constructor
    * @param apiService    API Service
+   * @param router        Router
    */
-  constructor(private apiService: ApiService) {
+  constructor(
+    private apiService: ApiService,
+    private router: Router
+  ) {
     addIcons({ trashSharp, create });
   }
 
@@ -61,5 +65,13 @@ export class GameModulePage implements OnInit {
 
   goToUpdatePage(gameId: number) {}
 
-  delete(gameId: number) {}
+  delete(gameId: number) {
+    this.apiService.deleteGame(gameId).subscribe({
+      next: (res) => {
+        this.router.navigate(['/games']).then(() => {
+          window.location.reload();
+        });
+      }
+    });
+  }
 }
