@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonList, IonItem, IonLabel, IonThumbnail, IonSearchbar, IonRefresher, IonRefresherContent, IonIcon, IonItemSliding, IonItemOption, IonItemOptions } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonList, IonItem, IonLabel, IonThumbnail, IonSearchbar, IonRefresher, IonRefresherContent, IonIcon, IonItemSliding, IonItemOption, IonItemOptions, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { Platform } from 'src/app/core/interfaces/platform';
 import { ApiService } from 'src/app/core/services/api.service';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { create, trashSharp } from 'ionicons/icons';
+import { add, create, trashSharp } from 'ionicons/icons';
 
 @Component({
   selector: 'app-platform-module',
   templateUrl: './platform-module.page.html',
   styleUrls: ['./platform-module.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton, TranslateModule, IonList, IonLabel, IonItem, IonThumbnail, IonSearchbar, IonRefresher, IonRefresherContent, IonIcon, IonItemSliding, IonItemOption, IonItemOptions]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton, TranslateModule, IonList, IonLabel, IonItem, IonThumbnail, IonSearchbar, IonRefresher, IonRefresherContent, IonIcon, IonItemSliding, IonItemOption, IonItemOptions, IonFab, IonFabButton]
 })
 export class PlatformModulePage implements OnInit {
   /* Flag for the platforms' array */
@@ -33,7 +33,7 @@ export class PlatformModulePage implements OnInit {
     private apiService: ApiService,
     private router: Router
   ) {
-    addIcons({ trashSharp, create });
+    addIcons({ trashSharp, create, add });
   }
 
   ngOnInit() {
