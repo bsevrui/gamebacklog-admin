@@ -5,7 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton,
 import { TranslateModule } from '@ngx-translate/core';
 import { Genre } from 'src/app/core/interfaces/genre';
 import { ApiService } from 'src/app/core/services/api.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { create, trashSharp, add } from 'ionicons/icons';
 
@@ -15,7 +15,7 @@ import { create, trashSharp, add } from 'ionicons/icons';
   templateUrl: './genre-module.page.html',
   styleUrls: ['./genre-module.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TranslateModule, IonButtons, IonMenuButton, IonList, IonItem, IonLabel, IonSearchbar, IonRefresher, IonRefresherContent, IonItemSliding, IonItemOptions, IonItemOption, IonIcon, IonFab, IonFabButton]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TranslateModule, IonButtons, IonMenuButton, IonList, IonItem, IonLabel, IonSearchbar, IonRefresher, IonRefresherContent, IonItemSliding, IonItemOptions, IonItemOption, IonIcon, IonFab, IonFabButton, RouterLink]
 })
 export class GenreModulePage implements OnInit {
   /* Flag for the genres' array */
