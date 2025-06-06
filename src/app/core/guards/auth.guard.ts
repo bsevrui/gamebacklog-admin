@@ -6,8 +6,9 @@ export const authGuard: CanActivateFn = async (route, state) => {
   const router = inject(Router);
   const storageService = inject(StorageService);
   const authenticated = await storageService.isAuthenticated();
+  const user = await storageService.getUserData();
 
-  if (authenticated) {
+  if (authenticated && user.role == 'ADMIN') {
     return true;
   } else {
     router.navigate(['/auth/login']);
