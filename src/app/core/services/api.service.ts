@@ -39,23 +39,6 @@ export class ApiService {
   }
 
   /**
-   * Platforms
-   * @returns platforms on db
-   */
-  getPlatforms(): Observable<Platform []> {
-    return this.http.get<Platform []>(environment.apiBaseUrl+'platforms');
-  }
-
-  /**
-   * Platform
-   * @param platformId platform's id
-   * @returns selected platform's info on db
-   */
-  getPlatform(platformId: number): Observable<Platform> {
-    return this.http.get<Platform>(environment.apiBaseUrl+'platforms/'+platformId);
-  }
-  
-  /**
    * Genres
    * @returns genres on db
    */
@@ -70,6 +53,28 @@ export class ApiService {
    */
   getGenre(genreId: number): Observable<Genre> {
     return this.http.get<Genre>(environment.apiBaseUrl+'genres/'+genreId);
+  }
+
+
+  deleteGenre(genreId: number) {
+    return this.http.delete(environment.apiBaseUrl+'genres/'+genreId);
+  }
+
+  /**
+   * Platforms
+   * @returns platforms on db
+   */
+  getPlatforms(): Observable<Platform []> {
+    return this.http.get<Platform []>(environment.apiBaseUrl+'platforms');
+  }
+
+  /**
+   * Platform
+   * @param platformId platform's id
+   * @returns selected platform's info on db
+   */
+  getPlatform(platformId: number): Observable<Platform> {
+    return this.http.get<Platform>(environment.apiBaseUrl+'platforms/'+platformId);
   }
 
   /**
