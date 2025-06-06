@@ -9,7 +9,7 @@ import { LocalizationService } from './core/services/localization.service';
 import { IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonItem, IonIcon, IonLabel, IonRouterOutlet, IonRouterLink } from '@ionic/angular/standalone';
 import { MenuPage } from './core/interfaces/menu-page';
 import { addIcons } from 'ionicons';
-import { gameController, gameControllerSharp, pricetag, peopleSharp } from 'ionicons/icons';
+import { gameController, gameControllerSharp, pricetag, peopleSharp, personSharp } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +27,7 @@ export class AppComponent {
     private platform: Platform,
     private localizationService: LocalizationService
   ) {
-    addIcons({ gameController, gameControllerSharp, pricetag, peopleSharp });
+    addIcons({ gameController, gameControllerSharp, pricetag, peopleSharp, personSharp });
     this.initializeApp();
   }
 
@@ -35,7 +35,8 @@ export class AppComponent {
     { title: 'PAGE_GAMES', icon: 'game-controller', path: '/games' },
     { title: 'PAGE_GENRES', icon: 'pricetag', path: '/genres' },
     { title: 'PAGE_PLATFORMS', icon: 'game-controller-sharp', path: '/platforms' },
-    { title: 'PAGE_USERS', icon: 'people-sharp', path: '/users' }
+    { title: 'PAGE_USERS', icon: 'people-sharp', path: '/users' },
+    { title: 'PAGE_PROFILE', icon: 'person-sharp', path: '/profile' }
 ]
 
   initializeApp() {
