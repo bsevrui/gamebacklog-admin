@@ -3,7 +3,10 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list>
-          
+          <ion-item button *ngFor="let p of menuPages" lines="none" routerDirection="root" [routerLink]="[p.path]" detail="false" routerLinkActive="selected">
+            <ion-icon [name]="p.icon" slot="start"></ion-icon>
+            <ion-label>{{ p.title | translate }}</ion-label>
+          </ion-item>
         </ion-list>
       </ion-content>
     </ion-menu>
