@@ -16,16 +16,26 @@
       <ion-refresher-content pullingIcon="chevron-down-circle-outline"></ion-refresher-content>
     </ion-refresher>
     <ion-list>
-      <ion-item lines="full" *ngFor="let game of filteredGames">
-        <ion-thumbnail slot="start">
-          <img [alt]="game.title" [src]="game.cover" *ngIf="game.cover != null">
-          <img alt="img not available" src="assets/img/na.png" *ngIf="game.cover == null">
-        </ion-thumbnail>
-        <ion-label>
-          <h3>{{ game.title }}</h3>
-          <p class="ion-text-wrap">{{ game.type }}</p>
-        </ion-label>
-      </ion-item>
+      <ion-item-sliding *ngFor="let game of filteredGames">
+        <ion-item lines="full">
+          <ion-thumbnail slot="start">
+            <img [alt]="game.title" [src]="game.cover" *ngIf="game.cover != null">
+            <img alt="img not available" src="assets/img/na.png" *ngIf="game.cover == null">
+          </ion-thumbnail>
+          <ion-label>
+            <h3>{{ game.title }}</h3>
+            <p class="ion-text-wrap">{{ game.type }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item-options>
+          <ion-item-option color="warning">
+            <ion-icon slot="icon-only" name="create"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="danger">
+            <ion-icon slot="icon-only" name="trash-sharp"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-list>
   </ion-content>
 </div>
