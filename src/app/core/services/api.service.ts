@@ -81,6 +81,10 @@ export class ApiService {
     return this.http.delete(environment.apiBaseUrl+'platforms/'+platformId);
   }
 
+  getUsers(): Observable<User[]> {
+    return this.http.get<User []>(environment.apiBaseUrl+'users');
+  }
+
   /**
    * Get User
    * @param userId user's id
@@ -88,5 +92,9 @@ export class ApiService {
    */
   getUser(userId: number): Observable<User> {
     return this.http.get<User>(environment.apiBaseUrl+'users/'+userId);
+  }
+
+  deleteUser(userId: number) {
+    return this.http.delete(environment.apiBaseUrl+'users/'+userId);
   }
 }
