@@ -1,13 +1,31 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>game-module</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-title size="large">game-module</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>{{ 'PAGE_GAMES' | translate }}</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-searchbar placeholder="" show-clear-button="focus" [debounce]="500" [(ngModel)]="searchQuery" (ionInput)="filterGames()"></ion-searchbar>
     </ion-toolbar>
   </ion-header>
-</ion-content>
+  
+  <ion-content [fullscreen]="true">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="chevron-down-circle-outline"></ion-refresher-content>
+    </ion-refresher>
+    <ion-list>
+      <ion-item lines="full" *ngFor="let game of filteredGames">
+        <ion-thumbnail slot="start">
+          <img [alt]="game.title" [src]="game.cover" *ngIf="game.cover != null">
+          <img alt="img not available" src="assets/img/na.png" *ngIf="game.cover == null">
+        </ion-thumbnail>
+        <ion-label>
+          <h3>{{ game.title }}</h3>
+          <p class="ion-text-wrap">{{ game.type }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</div>
