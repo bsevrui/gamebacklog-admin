@@ -34,6 +34,10 @@ export class ApiService {
     return this.http.get<Game>(environment.apiBaseUrl+'games/'+gameId);
   }
 
+  deleteGame(gameId: number) {
+    return this.http.delete(environment.apiBaseUrl+'games/'+gameId);
+  }
+
   /**
    * Platforms
    * @returns platforms on db
