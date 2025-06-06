@@ -6,5 +6,15 @@ export const gameRoutes: Routes = [
         path: '',
         canActivate: [authGuard],
         loadComponent: () => import('./game-module.page').then(m => m.GameModulePage)
+    },
+    {
+        path: 'add',
+        canActivate: [authGuard],
+        loadComponent: () => import('./add/add.page').then(m => m.AddPage)
+    },
+    {
+        path: 'update',
+        canActivate: [authGuard],
+        loadComponent: () => import('./update/update.page').then(m => m.UpdatePage)
     }
 ];
