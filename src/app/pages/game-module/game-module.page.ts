@@ -5,7 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton,
 import { TranslateModule } from '@ngx-translate/core';
 import { Game } from 'src/app/core/interfaces/game';
 import { ApiService } from 'src/app/core/services/api.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { add, create, trashSharp } from 'ionicons/icons';
 
@@ -14,7 +14,7 @@ import { add, create, trashSharp } from 'ionicons/icons';
   templateUrl: './game-module.page.html',
   styleUrls: ['./game-module.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton, TranslateModule, IonList, IonItem, IonLabel, IonThumbnail, IonSearchbar, IonRefresher, IonRefresherContent, IonItemSliding, IonItemOption, IonItemOptions, IonIcon, IonFab, IonFabButton]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton, TranslateModule, IonList, IonItem, IonLabel, IonThumbnail, IonSearchbar, IonRefresher, IonRefresherContent, IonItemSliding, IonItemOption, IonItemOptions, IonIcon, IonFab, IonFabButton, RouterLink]
 })
 export class GameModulePage implements OnInit {
   /* Flag for the games' array */
