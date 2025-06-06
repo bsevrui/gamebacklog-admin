@@ -5,7 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton,
 import { TranslateModule } from '@ngx-translate/core';
 import { Platform } from 'src/app/core/interfaces/platform';
 import { ApiService } from 'src/app/core/services/api.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { add, create, trashSharp } from 'ionicons/icons';
 
@@ -14,7 +14,7 @@ import { add, create, trashSharp } from 'ionicons/icons';
   templateUrl: './platform-module.page.html',
   styleUrls: ['./platform-module.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton, TranslateModule, IonList, IonLabel, IonItem, IonThumbnail, IonSearchbar, IonRefresher, IonRefresherContent, IonIcon, IonItemSliding, IonItemOption, IonItemOptions, IonFab, IonFabButton]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButtons, IonMenuButton, TranslateModule, IonList, IonLabel, IonItem, IonThumbnail, IonSearchbar, IonRefresher, IonRefresherContent, IonIcon, IonItemSliding, IonItemOption, IonItemOptions, IonFab, IonFabButton, RouterLink]
 })
 export class PlatformModulePage implements OnInit {
   /* Flag for the platforms' array */
