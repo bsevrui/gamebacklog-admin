@@ -17,7 +17,7 @@
     </ion-refresher>
     <ion-list>
       <ion-item-sliding *ngFor="let platform of filteredPlatforms">
-        <ion-item button lines="full">
+        <ion-item lines="full">
           <ion-thumbnail slot="start">
             <img [alt]="platform.name" [src]="platform.picture" *ngIf="platform.picture != null">
             <img alt="img not available" src="assets/img/na.png" *ngIf="platform.picture == null">

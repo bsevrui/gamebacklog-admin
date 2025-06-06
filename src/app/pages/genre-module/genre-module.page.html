@@ -17,7 +17,7 @@
     </ion-refresher>
     <ion-list>
       <ion-item-sliding *ngFor="let genre of filteredGenres">
-        <ion-item button lines="full">
+        <ion-item lines="full">
           <ion-label>
             <h3>{{ genre.name }}</h3>
             <p class="ion-text-wrap" *ngIf="genre.description != null">{{ genre.description }}</p>
