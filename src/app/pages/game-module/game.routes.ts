@@ -13,7 +13,7 @@ export const gameRoutes: Routes = [
         loadComponent: () => import('./add/add.page').then(m => m.AddPage)
     },
     {
-        path: 'update',
+        path: 'update/:gameId',
         canActivate: [authGuard],
         loadComponent: () => import('./update/update.page').then(m => m.UpdatePage)
     }
