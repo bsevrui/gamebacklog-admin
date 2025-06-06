@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonList, IonItem, IonLabel, IonSearchbar, IonRefresher, IonRefresherContent, IonItemOptions, IonItemOption, IonItemSliding, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonList, IonItem, IonLabel, IonSearchbar, IonRefresher, IonRefresherContent, IonItemOptions, IonItemOption, IonItemSliding, IonIcon, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { Genre } from 'src/app/core/interfaces/genre';
 import { ApiService } from 'src/app/core/services/api.service';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { create, trashSharp } from 'ionicons/icons';
+import { create, trashSharp, add } from 'ionicons/icons';
 
 
 @Component({
@@ -15,7 +15,7 @@ import { create, trashSharp } from 'ionicons/icons';
   templateUrl: './genre-module.page.html',
   styleUrls: ['./genre-module.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TranslateModule, IonButtons, IonMenuButton, IonList, IonItem, IonLabel, IonSearchbar, IonRefresher, IonRefresherContent, IonItemSliding, IonItemOptions, IonItemOption, IonIcon]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TranslateModule, IonButtons, IonMenuButton, IonList, IonItem, IonLabel, IonSearchbar, IonRefresher, IonRefresherContent, IonItemSliding, IonItemOptions, IonItemOption, IonIcon, IonFab, IonFabButton]
 })
 export class GenreModulePage implements OnInit {
   /* Flag for the genres' array */
@@ -34,7 +34,7 @@ export class GenreModulePage implements OnInit {
     private apiService: ApiService,
     private router: Router
   ) {
-    addIcons({ trashSharp, create });
+    addIcons({ trashSharp, create, add });
   }
 
   ngOnInit() {
