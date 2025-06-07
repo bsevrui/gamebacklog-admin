@@ -8,6 +8,7 @@ import { Genre } from '../interfaces/genre/genre';
 import { User } from '../interfaces/user/user';
 import { UpdateUser } from '../interfaces/user/update-user';
 import { CreateGame } from '../interfaces/game/create-game';
+import { UpdateGame } from '../interfaces/game/update-game';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,10 @@ export class ApiService {
 
   createGame(gameData: CreateGame): Observable<any> {
     return this.http.post(environment.apiBaseUrl+'games', gameData);
+  }
+
+  updateGame(gameId: number, gameData: UpdateGame) {
+    return this.http.patch(environment.apiBaseUrl+'games/'+gameId, gameData);
   }
 
   deleteGame(gameId: number) {
