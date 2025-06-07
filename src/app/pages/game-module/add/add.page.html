@@ -8,5 +8,28 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
+  <ion-list>
+    <ion-item lines="full">
+      <ion-input label="{{ 'LABEL_TITLE' | translate }}*" labelPlacement="floating" [(ngModel)]="title" value="" [counter]="true" maxlength="255" [clearInput]="true" debounce="500" inputmode="text" required="true"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-select label="{{ 'LABEL_TYPE' | translate }}*" label-placement="floating" value="{{ type }}" [(ngModel)]="type" required="true">
+        <ion-select-option value="DLC/Expansion">{{ 'SELECT_TYPE_DLCEXPANSION' | translate }}</ion-select-option>
+        <ion-select-option value="Game">{{ 'SELECT_TYPE_GAME' | translate }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-input label="{{ 'LABEL_COVER' | translate }}" labelPlacement="floating" [(ngModel)]="cover" value="" [counter]="true" maxlength="255" [clearInput]="true" debounce="500" type="url" inputmode="url"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div class="ion-padding">
+    <ion-button expand="block" color="success" (click)="create()">
+      <ion-icon slot="start" name="save-sharp"></ion-icon>
+      {{ 'ACTION_SAVE' | translate }}
+    </ion-button>
+    <ion-button expand="block" color="medium" fill="outline" [routerLink]="['/games']" routerDirection="backward">
+      <ion-icon slot="start" name="close"></ion-icon>
+      {{ 'ACTION_CANCEL' | translate }}
+    </ion-button>
+  </div>
 </ion-content>
