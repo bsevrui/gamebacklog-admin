@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Game } from '../interfaces/game';
-import { Platform } from '../interfaces/platform';
-import { Genre } from '../interfaces/genre';
-import { User } from '../interfaces/user';
-import { UpdateUser } from '../interfaces/update-user';
+import { Game } from '../interfaces/game/game';
+import { Platform } from '../interfaces/platform/platform';
+import { Genre } from '../interfaces/genre/genre';
+import { User } from '../interfaces/user/user';
+import { UpdateUser } from '../interfaces/user/update-user';
 
 @Injectable({
   providedIn: 'root'

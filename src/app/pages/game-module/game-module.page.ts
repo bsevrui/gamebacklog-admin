@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonList, IonItem, IonLabel, IonThumbnail, IonSearchbar, IonRefresher, IonRefresherContent, IonItemSliding, IonItemOptions, IonItemOption, IonIcon, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
-import { Game } from 'src/app/core/interfaces/game';
+import { Game } from 'src/app/core/interfaces/game/game';
 import { ApiService } from 'src/app/core/services/api.service';
 import { Router, RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';

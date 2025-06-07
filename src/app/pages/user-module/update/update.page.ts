@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonSelect, IonSelectOption, IonList, IonItem, IonButton, IonIcon, IonButtons, IonBackButton, IonLabel, IonInput } from '@ionic/angular/standalone';
 import { ApiService } from 'src/app/core/services/api.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { User } from 'src/app/core/interfaces/user';
+import { User } from 'src/app/core/interfaces/user/user';
 import { addIcons } from 'ionicons';
 import { saveSharp, close, mail } from 'ionicons/icons';
 

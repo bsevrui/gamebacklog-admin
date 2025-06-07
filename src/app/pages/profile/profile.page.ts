@@ -3,7 +3,7 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonMenuButton,
 import { TranslateModule } from '@ngx-translate/core';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { Router } from '@angular/router';
-import { User } from 'src/app/core/interfaces/user';
+import { User } from 'src/app/core/interfaces/user/user';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { calendar, gift, mail, idCard } from 'ionicons/icons';
