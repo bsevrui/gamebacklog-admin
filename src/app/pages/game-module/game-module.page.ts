@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonList, IonItem, IonLabel, IonThumbnail, IonSearchbar, IonRefresher, IonRefresherContent, IonItemSliding, IonItemOptions, IonItemOption, IonIcon, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
-import { Game } from 'src/app/core/interfaces/game/game';
 import { ApiService } from 'src/app/core/services/api.service';
+import { LocalizationService } from 'src/app/core/services/localization.service';
 import { Router, RouterLink } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { Game } from 'src/app/core/interfaces/game/game';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonList, IonItem, IonLabel, IonThumbnail, IonSearchbar, IonRefresher, IonRefresherContent, IonItemSliding, IonItemOptions, IonItemOption, IonIcon, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { add, create, trashSharp } from 'ionicons/icons';
 
@@ -26,12 +28,16 @@ export class GameModulePage implements OnInit {
 
   /**
    * Constructor
-   * @param apiService    API Service
-   * @param router        Router
+   * @param apiService            API Service
+   * @param localizationService   Localization Service
+   * @param router                Router
+   * @param toastCtrl             Toast Controller
    */
   constructor(
     private apiService: ApiService,
-    private router: Router
+    private localizationService: LocalizationService,
+    private router: Router,
+    private toastCtrl: ToastController
   ) {
     addIcons({ trashSharp, create, add });
   }
@@ -65,13 +71,27 @@ export class GameModulePage implements OnInit {
 
   goToUpdatePage(gameId: number) {}
 
+  async presentToast(msg: string) {
+    const toast = await this.toastCtrl.create({
+      message: msg,
+      duration: 1500,
+      position: 'bottom',
+      color: 'success'
+    });
+    await toast.present();
+  }
+
   delete(gameId: number) {
     this.apiService.deleteGame(gameId).subscribe({
       next: (res) => {
-        this.router.navigate(['/games']).then(() => {
-          window.location.reload();
+        this.localizationService.translate(['TOAST_GAME_DELETED']).subscribe(async (values) => {
+          this.router.navigate(['/games']).then(() => {
+            window.location.reload();
+          });
+          await this.presentToast(values['TOAST_GAME_DELETED']);
         });
-      }
+      },
+      error: (err) => console.error('error: ', err)
     });
   }
 }
