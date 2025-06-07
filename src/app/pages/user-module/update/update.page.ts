@@ -9,7 +9,7 @@ import { ToastController } from '@ionic/angular';
 import { User } from 'src/app/core/interfaces/user/user';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonSelect, IonSelectOption, IonList, IonItem, IonButton, IonIcon, IonButtons, IonBackButton, IonLabel, IonInput } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { saveSharp, close, mail } from 'ionicons/icons';
+import { saveSharp, close, mail, at } from 'ionicons/icons';
 
 @Component({
   selector: 'app-update',
@@ -21,7 +21,6 @@ import { saveSharp, close, mail } from 'ionicons/icons';
 export class UpdatePage implements OnInit {
   private userId?: number;
   public user?: User;
-  public username?: string;
   public role?: 'ADMIN' | 'USER';
   public birthdate?: Date;
   public firstName?: string;
@@ -43,7 +42,7 @@ export class UpdatePage implements OnInit {
     private router: Router,
     private toastCtrl: ToastController
   ) {
-    addIcons({ saveSharp, close, mail });
+    addIcons({ saveSharp, close, mail, at });
   }
 
   ngOnInit() {
@@ -74,7 +73,6 @@ export class UpdatePage implements OnInit {
   update() {
     if (this.userId) {
       this.apiService.updateUser(this.userId, {
-        username: this.username,
         role: this.role,
         birthdate: this.birthdate,
         firstName: this.firstName,
