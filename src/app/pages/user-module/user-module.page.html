@@ -25,6 +25,10 @@
           <h3>{{ 'LABEL_USERNAME' | translate }}</h3>
           <p>{{ user.username }}</p>
         </ion-label>
+        <ion-label>
+          <h3>{{ 'LABEL_ROLE' | translate }}</h3>
+          <p>{{ user.role }}</p>
+        </ion-label>
         <ion-label *ngIf="user.firstName != null || user.lastName != null">
           <h3>{{ 'LABEL_FULLNAME' | translate }}</h3>
           <p>{{ user.firstName }} {{ user.lastName }}</p>
