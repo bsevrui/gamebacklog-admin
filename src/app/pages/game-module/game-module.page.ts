@@ -69,7 +69,9 @@ export class GameModulePage implements OnInit {
     this.filteredGames = this.games.filter((game => game.title.toLowerCase().includes(this.searchQuery.toLowerCase())));
   }
 
-  goToUpdatePage(gameId: number) {}
+  goToUpdatePage(gameId: number) {
+    this.router.navigate(['/games/update', gameId]);
+  }
 
   async presentToast(msg: string) {
     const toast = await this.toastCtrl.create({
