@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonList, IonItemSliding, IonItem, IonItemOptions, IonItemOption, IonLabel, IonAvatar, IonSearchbar, IonRefresher, IonRefresherContent, IonIcon } from '@ionic/angular/standalone';
-import { User } from 'src/app/core/interfaces/user/user';
 import { ApiService } from 'src/app/core/services/api.service';
+import { LocalizationService } from 'src/app/core/services/localization.service';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { User } from 'src/app/core/interfaces/user/user';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonList, IonItemSliding, IonItem, IonItemOptions, IonItemOption, IonLabel, IonAvatar, IonSearchbar, IonRefresher, IonRefresherContent, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { create, trashSharp } from 'ionicons/icons';
 
@@ -27,11 +29,15 @@ export class UserModulePage implements OnInit {
   /**
    * Constructor
    * @param apiService API Service.
+   * @param localizationService Localization Service.
    * @param router Router.
+   * @param toastCtrl Toast Controller.
    */
   constructor(
     private apiService: ApiService,
-    private router: Router
+    private localizationService: LocalizationService,
+    private router: Router,
+    private toastCtrl: ToastController
   ) {
     addIcons({ create, trashSharp });
   }
@@ -64,11 +70,24 @@ export class UserModulePage implements OnInit {
     this.router.navigate(['/users/update', userId]);
   }
 
+  async presentToast(msg: string) {
+    const toast = await this.toastCtrl.create({
+      message: msg,
+      duration: 1500,
+      position: 'bottom',
+      color: 'success'
+    });
+    await toast.present();
+  }
+
   delete(userId: number) {
     this.apiService.deleteUser(userId).subscribe({
       next: (res) => {
-        this.router.navigate(['/users']).then(() => {
-          window.location.reload();
+        this.localizationService.translate(['TOAST_USER_DELETED']).subscribe(async (values) => {
+          this.router.navigate(['/users']).then(() => {
+            window.location.reload();
+          });
+          await this.presentToast(values['TOAST_USER_DELETED']);
         });
       }
     });
