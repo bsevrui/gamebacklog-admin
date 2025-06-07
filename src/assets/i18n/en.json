@@ -44,6 +44,9 @@
     "TOAST_PLATFORM_UPDATED": "Platform Updated successfully",
     "TOAST_USER_DELETED": "User Deleted successfully",
     "TOAST_USER_UPDATED": "User Updated successfully",
+    "WARNING_GAME_ALREADYCREATED": "Game is already registered on the db",
+    "WARNING_GENRE_ALREADYCREATED": "Genre is already registered on the db",
+    "WARNING_PLATFORM_ALREADYCREATED": "Platform is already registered on the db",
     "WARNING_GENERIC": "Something went wrong :/",
     "WARNING_MANDATORY_FIELDS": "Fields marked with * are mandatory",
     "WARNING_WRONG_CREDENTIALS": "Credentials do not match"

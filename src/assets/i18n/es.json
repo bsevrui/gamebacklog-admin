@@ -44,6 +44,9 @@
     "TOAST_PLATFORM_UPDATED": "Plataforma Actualizada con éxito",
     "TOAST_USER_DELETED": "Usuario Eliminado con éxito",
     "TOAST_USER_UPDATED": "Usuario Actualizado con éxito",
+    "WARNING_GAME_ALREADYCREATED": "Videojuego ya registrado en la BBDD",
+    "WARNING_GENRE_ALREADYCREATED": "Género ya registrado en la BBDD",
+    "WARNING_PLATFORM_ALREADYCREATED": "Plataforma ya registrada en la BBDD",
     "WARNING_GENERIC": "Algo ha salido mal :/",
     "WARNING_MANDATORY_FIELDS": "Los campos marcados con * son obligatorios",
     "WARNING_WRONG_CREDENTIALS": "Los credenciales no son correctos"
