@@ -64,48 +64,30 @@ export class AddPage implements OnInit {
       this.apiService.createGame(gameData).pipe(
         catchError((error) => {
           this.localizationService.translate(['WARNING_GENERIC', 'WARNING_GAME_ALREADYCREATED']).subscribe(async (values) => {
-            //
+            let errorMsg = values['WARNING_GENERIC'];
+
+            if (error?.error?.message == 'game already registered') {
+              errorMsg = values['WARNING_GAME_ALREADYCREATED'];
+            }
+
+            this.presentToast(errorMsg, 'danger');
           });
           return of(null);
         })
-      )
+      ).subscribe((res) => {
+        if (res) {
+          this.localizationService.translate(['TOAST_GAME_CREATED']).subscribe(async (values) => {
+            this.router.navigate(['/games']).then(() => {
+              window.location.reload();
+            });
+            await this.presentToast(values['TOAST_GAME_CREATED'], 'success');
+          });
+        }
+      })
     } else {
       this.localizationService.translate(['WARNING_MANDATORY_FIELDS']).subscribe(async (values) => {
         this.presentToast(values['WARNING_MANDATORY_FIELDS'], 'warning');
       });
     }
-
-    /*
-    if (this.title != "" && this.type != null) {
-      const gameData: CreateGame = {
-        title: this.title,
-        type: this.type,
-        cover: this.cover
-      };
-      this.apiService.createGame(gameData).subscribe(
-        async (res) => {
-          this.localizationService.translate(['TOAST_GAME_CREATED']).subscribe(async (values) => {
-            this.router.navigate(['/games']).then(() => {
-              window.location.reload();
-            });
-            await this.presentToast(values['TOAST_GAME_CREATED']);
-          });
-        },
-        async (err) => {
-          this.localizationService.translate(['WARNING_GENERIC', 'WARNING_GAME_ALREADYCREATED']).subscribe(async (values) => {
-            let errorMsg = values['WARNING_GENERIC'];
-            if (err == "game already exist") {
-              errorMsg = values['WARNING_GAME_ALREADYCREATED'];
-            }
-            await this.presentToast(errorMsg);
-          });
-        }
-      )
-    } else {
-      this.localizationService.translate(['WARNING_MANDATORY_FIELDS']).subscribe(async (values) => {
-        await this.presentToast(values['WARNING_MANDATORY_FIELDS']);
-      });
-    }
-    */
   }
 }
