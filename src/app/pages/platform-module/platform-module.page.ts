@@ -63,7 +63,9 @@ export class PlatformModulePage implements OnInit {
     this.filteredPlatforms = this.platforms.filter((platform => platform.name.toLowerCase().includes(this.searchQuery.toLocaleLowerCase())));
   }
 
-  goToUpdatePage(platformId: number) {}
+  goToUpdatePage(platformId: number) {
+    this.router.navigate(['/platforms/update', platformId]);
+  }
 
   delete(platformId: number) {
     this.apiService.deletePlatform(platformId).subscribe({
