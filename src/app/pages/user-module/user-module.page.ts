@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ApiService } from 'src/app/core/services/api.service';
 import { LocalizationService } from 'src/app/core/services/localization.service';
+import { StorageService } from 'src/app/core/services/storage.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { User } from 'src/app/core/interfaces/user/user';
@@ -19,6 +20,8 @@ import { create, personRemove } from 'ionicons/icons';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TranslateModule, IonButtons, IonMenuButton, IonList, IonItemSliding, IonItem, IonItemOptions, IonItemOption, IonLabel, IonAvatar, IonSearchbar, IonRefresher, IonRefresherContent, IonIcon]
 })
 export class UserModulePage implements OnInit {
+  /* Flag for current user */
+  public currentUser?: User;
   /* Flag for the users' array */
   private users: User[] = [];
   /* Flag for search query */
@@ -30,19 +33,22 @@ export class UserModulePage implements OnInit {
    * Constructor
    * @param apiService API Service.
    * @param localizationService Localization Service.
+   * @param storageService Storage Service.
    * @param router Router.
    * @param toastCtrl Toast Controller.
    */
   constructor(
     private apiService: ApiService,
     private localizationService: LocalizationService,
+    private storageService: StorageService,
     private router: Router,
     private toastCtrl: ToastController
   ) {
     addIcons({ create, personRemove });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.currentUser = await this.storageService.getUserData();
     this.loadData();
   }
 

@@ -38,7 +38,7 @@
           <ion-item-option color="warning" (click)="goToUpdatePage(user.id)">
             <ion-icon slot="icon-only" name="create"></ion-icon>
           </ion-item-option>
-          <ion-item-option color="danger" (click)="delete(user.id)">
+          <ion-item-option color="danger" (click)="delete(user.id)" *ngIf="user.id != currentUser?.id">
             <ion-icon slot="icon-only" name="person-remove"></ion-icon>
           </ion-item-option>
         </ion-item-options>
