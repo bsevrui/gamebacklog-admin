@@ -50,7 +50,9 @@
     "WARNING_GAME_ALREADYCREATED": "Vidogame is already registered on the db",
     "WARNING_GAME_TITLE_ALREADYREGISTERED": "Videogame's title already registered on db",
     "WARNING_GENRE_ALREADYCREATED": "Genre is already registered on the db",
+    "WARNING_GENRE_NAME_ALREADYREGISTERED": "Genre's name is already registered on the db",
     "WARNING_PLATFORM_ALREADYCREATED": "Platform is already registered on the db",
+    "WARNING_PLATFORM_NAME_ALREADYREGISTERED": "Platform's name is already registered on the db",
     "WARNING_GENERIC": "Something went wrong :/",
     "WARNING_MANDATORY_FIELDS": "Fields marked with * are mandatory",
     "WARNING_WRONG_CREDENTIALS": "Credentials do not match"
