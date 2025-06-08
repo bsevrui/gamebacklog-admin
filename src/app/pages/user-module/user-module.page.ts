@@ -9,7 +9,7 @@ import { ToastController } from '@ionic/angular';
 import { User } from 'src/app/core/interfaces/user/user';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonList, IonItemSliding, IonItem, IonItemOptions, IonItemOption, IonLabel, IonAvatar, IonSearchbar, IonRefresher, IonRefresherContent, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { create, trashSharp } from 'ionicons/icons';
+import { create, personRemove } from 'ionicons/icons';
 
 @Component({
   selector: 'app-user-module',
@@ -39,7 +39,7 @@ export class UserModulePage implements OnInit {
     private router: Router,
     private toastCtrl: ToastController
   ) {
-    addIcons({ create, trashSharp });
+    addIcons({ create, personRemove });
   }
 
   ngOnInit() {
