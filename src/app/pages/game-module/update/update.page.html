@@ -11,10 +11,10 @@
   <form (ngSubmit)="update()">
     <ion-list>
       <ion-item lines="full">
-        <ion-input label="{{ 'LABEL_TITLE' | translate }}*" labelPlacement="floating" name="title" [(ngModel)]="title" value="{{ game?.title }}" [counter]="true" maxlength="255" [clearInput]="true" debounce="500" inputmode="text" required="true"></ion-input>
+        <ion-input label="{{ 'LABEL_TITLE' | translate }}" labelPlacement="floating" name="title" [(ngModel)]="title" value="{{ game?.title }}" [counter]="true" maxlength="255" [clearInput]="true" debounce="500" inputmode="text" required="true"></ion-input>
       </ion-item>
       <ion-item lines="full">
-        <ion-select label="{{ 'LABEL_TYPE' | translate }}*" label-placement="floating" value="{{ game?.type }}" name="type" [(ngModel)]="type" required="true">
+        <ion-select label="{{ 'LABEL_TYPE' | translate }}" label-placement="floating" value="{{ game?.type }}" name="type" [(ngModel)]="type" required="true">
           <ion-select-option value="DLC/Expansion">{{ 'SELECT_TYPE_DLCEXPANSION' | translate }}</ion-select-option>
           <ion-select-option value="Game">{{ 'SELECT_TYPE_GAME' | translate }}</ion-select-option>
         </ion-select>
