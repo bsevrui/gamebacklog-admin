@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonList, IonItem, IonLabel, IonSearchbar, IonRefresher, IonRefresherContent, IonItemOptions, IonItemOption, IonItemSliding, IonIcon, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
-import { Genre } from 'src/app/core/interfaces/genre/genre';
 import { ApiService } from 'src/app/core/services/api.service';
+import { LocalizationService } from 'src/app/core/services/localization.service';
 import { Router, RouterLink } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { Genre } from 'src/app/core/interfaces/genre/genre';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonList, IonItem, IonLabel, IonSearchbar, IonRefresher, IonRefresherContent, IonItemOptions, IonItemOption, IonItemSliding, IonIcon, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { create, trashSharp, add } from 'ionicons/icons';
 
@@ -27,11 +29,15 @@ export class GenreModulePage implements OnInit {
 
   /**
    * Constructor
-   * @param apiService    API Service
-   * @param router        Router
+   * @param apiService          API Service
+   * @param localizationService Localization Service
+   * @param toastCtrl           Toast Controller
+   * @param router              Router
    */
   constructor(
     private apiService: ApiService,
+    private localizationService: LocalizationService,
+    private toastCtrl: ToastController,
     private router: Router
   ) {
     addIcons({ trashSharp, create, add });
@@ -64,13 +70,28 @@ export class GenreModulePage implements OnInit {
     this.filteredGenres = this.genres.filter((genre => genre.name.toLowerCase().includes(this.searchQuery.toLowerCase())));
   }
 
-  goToUpdatePage(genreId: number) {}
+  goToUpdatePage(genreId: number) {
+    this.router.navigate(['/genres/update', genreId]);
+  }
+
+  async presentToast(msg: string) {
+    const toast = await this.toastCtrl.create({
+      message: msg,
+      duration: 1500,
+      position: 'bottom',
+      color: 'success'
+    });
+    await toast.present();
+  }
 
   delete(genreId: number) {
     this.apiService.deleteGenre(genreId).subscribe({
       next: (res) => {
-        this.router.navigate(['/genres']).then(() => {
-          window.location.reload();
+        this.localizationService.translate(['TOAST_GENRE_DELETED']).subscribe(async (values) => {
+          this.router.navigate(['/genres']).then(() => {
+            window.location.reload();
+          });
+          await this.presentToast(values['TOAST_GENRE_DELETED']);
         });
       }
     });
