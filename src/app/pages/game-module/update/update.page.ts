@@ -7,10 +7,9 @@ import { LocalizationService } from 'src/app/core/services/localization.service'
 import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Game } from 'src/app/core/interfaces/game/game';
+import { Genre } from 'src/app/core/interfaces/genre/genre';
 import { UpdateGame } from 'src/app/core/interfaces/game/update-game';
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonList, IonItem, IonInput, IonSelect, IonSelectOption, IonButton, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonList, IonListHeader, IonItem, IonInput, IonSelect, IonSelectOption, IonButton, IonIcon, IonCheckbox } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { saveSharp, close } from 'ionicons/icons';
 
@@ -19,14 +18,16 @@ import { saveSharp, close } from 'ionicons/icons';
   templateUrl: './update.page.html',
   styleUrls: ['./update.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TranslateModule, RouterLink, IonButtons, IonBackButton, IonList, IonItem, IonInput, IonSelect, IonSelectOption, IonButton, IonIcon]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TranslateModule, RouterLink, IonButtons, IonBackButton, IonList, IonListHeader, IonItem, IonInput, IonSelect, IonSelectOption, IonButton, IonIcon, IonCheckbox]
 })
 export class UpdatePage implements OnInit {
   private gameId?: number;
   public game?: Game;
+  public genres?: Genre[];
   public title?: string;
   public type?: 'Game' | 'DLC/Expansion';
   public cover?: string;
+  public selectedGenres: { [key: number]: boolean } = {};
 
   /**
    * Constructor
@@ -57,6 +58,10 @@ export class UpdatePage implements OnInit {
         data => this.game = data
       );
     }
+
+    this.apiService.getGenres().subscribe(
+      data => this.genres = data
+    );
   }
 
   async presentToast(msg: string, color: string) {
@@ -71,10 +76,13 @@ export class UpdatePage implements OnInit {
 
   update() {
     if (this.gameId) {
+      const selectedGenreIds = Object.keys(this.selectedGenres).filter((key) => this.selectedGenres[Number(key)]).map((key) => Number(key));
+
       const gameData: UpdateGame = {
         title: this.title,
         type: this.type,
-        cover: this.cover
+        cover: this.cover,
+        genres: selectedGenreIds
       }
 
       this.apiService.updateGame(this.gameId, gameData).subscribe({

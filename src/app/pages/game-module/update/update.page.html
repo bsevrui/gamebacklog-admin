@@ -8,25 +8,35 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
-    <ion-item lines="full">
-      <ion-input label="{{ 'LABEL_TITLE' | translate }}*" labelPlacement="floating" [(ngModel)]="title" value="{{ game?.title }}" [counter]="true" maxlength="255" [clearInput]="true" debounce="500" inputmode="text" required="true"></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-select label="{{ 'LABEL_TYPE' | translate }}*" label-placement="floating" value="{{ game?.type }}" [(ngModel)]="type" required="true">
-        <ion-select-option value="DLC/Expansion">{{ 'SELECT_TYPE_DLCEXPANSION' | translate }}</ion-select-option>
-        <ion-select-option value="Game">{{ 'SELECT_TYPE_GAME' | translate }}</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-input label="{{ 'LABEL_COVER' | translate }}" labelPlacement="floating" [(ngModel)]="cover" value="{{ game?.cover }}" [counter]="true" maxlength="255" [clearInput]="true" debounce="500" type="url" inputmode="url"></ion-input>
-    </ion-item>
-  </ion-list>
+  <form (ngSubmit)="update()">
+    <ion-list>
+      <ion-item lines="full">
+        <ion-input label="{{ 'LABEL_TITLE' | translate }}*" labelPlacement="floating" name="title" [(ngModel)]="title" value="{{ game?.title }}" [counter]="true" maxlength="255" [clearInput]="true" debounce="500" inputmode="text" required="true"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-select label="{{ 'LABEL_TYPE' | translate }}*" label-placement="floating" value="{{ game?.type }}" name="type" [(ngModel)]="type" required="true">
+          <ion-select-option value="DLC/Expansion">{{ 'SELECT_TYPE_DLCEXPANSION' | translate }}</ion-select-option>
+          <ion-select-option value="Game">{{ 'SELECT_TYPE_GAME' | translate }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-input label="{{ 'LABEL_COVER' | translate }}" labelPlacement="floating" name="cover" [(ngModel)]="cover" value="{{ game?.cover }}" [counter]="true" maxlength="255" [clearInput]="true" debounce="500" type="url" inputmode="url"></ion-input>
+      </ion-item>
+      <ion-list>
+        <ion-list-header>{{ 'TITLE_GENRES' | translate }}</ion-list-header>
+        <div class="ion-padding" *ngFor="let genre of genres">
+          <ion-checkbox labelPlacement="end" name="genres" [(ngModel)]="selectedGenres[genre.id]" [value]="genre.id">{{ genre.name }}</ion-checkbox>
+        </div>
+      </ion-list>
+    </ion-list>
+    <div class="ion-padding">
+      <ion-button expand="block" color="success" type="submit">
+        <ion-icon slot="start" name="save-sharp"></ion-icon>
+        {{ 'ACTION_SAVE' | translate }}
+      </ion-button>
+    </div>
+  </form>
   <div class="ion-padding">
-    <ion-button expand="block" color="success" (click)="update()">
-      <ion-icon slot="start" name="save-sharp"></ion-icon>
-      {{ 'ACTION_SAVE' | translate }}
-    </ion-button>
     <ion-button expand="block" color="medium" fill="outline" [routerLink]="['/games']" routerDirection="backward">
       <ion-icon slot="start" name="close"></ion-icon>
       {{ 'ACTION_CANCEL' | translate }}
