@@ -10,6 +10,7 @@ import { UpdateUser } from '../interfaces/user/update-user';
 import { CreateGame } from '../interfaces/game/create-game';
 import { UpdateGame } from '../interfaces/game/update-game';
 import { UpdateGenre } from '../interfaces/genre/update-genre';
+import { CreateGenre } from '../interfaces/genre/create-genre';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +66,10 @@ export class ApiService {
    */
   getGenre(genreId: number): Observable<Genre> {
     return this.http.get<Genre>(environment.apiBaseUrl+'genres/'+genreId);
+  }
+
+  createGenre(genreData: CreateGenre): Observable<any> {
+    return this.http.post(environment.apiBaseUrl+'genres/', genreData);
   }
 
   updateGenre(genreId: number, genreData: UpdateGenre) {
