@@ -87,7 +87,18 @@ export class UpdatePage implements OnInit {
             await this.presentToast(values['TOAST_GAME_UPDATED'], 'success');
           })
         },
-        error: (err) => console.error('error: ', err)
+        error: async (err) => {
+          console.error('error: ', err);
+          this.localizationService.translate(['WARNING_GAME_TITLE_ALREADYREGISTERED', 'WARNING_GENERIC']).subscribe(async (values) => {
+            let errorMsg = values['WARNING_GENERIC'];
+            
+            if (err.status == 409) {
+              errorMsg = values['WARNING_GAME_TITLE_ALREADYREGISTERED'];
+            }
+
+            await this.presentToast(errorMsg, 'danger');
+          });
+        }
       });
     }
   }
