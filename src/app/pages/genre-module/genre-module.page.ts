@@ -77,7 +77,7 @@ export class GenreModulePage implements OnInit {
   async presentToast(msg: string) {
     const toast = await this.toastCtrl.create({
       message: msg,
-      duration: 1500,
+      duration: 2000,
       position: 'bottom',
       color: 'success'
     });
