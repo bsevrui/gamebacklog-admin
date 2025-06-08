@@ -19,7 +19,7 @@ import { saveSharp, close } from 'ionicons/icons';
   templateUrl: './update.page.html',
   styleUrls: ['./update.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TranslateModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, TranslateModule, RouterLink, IonButtons, IonBackButton, IonList, IonItem, IonInput, IonSelect, IonSelectOption, IonButton, IonIcon]
 })
 export class UpdatePage implements OnInit {
   private gameId?: number;
@@ -48,19 +48,47 @@ export class UpdatePage implements OnInit {
 
   ngOnInit() {
     this.gameId = Number(this.activatedRoute.snapshot.paramMap.get('gameId'));
+    this.loadData();
   }
 
-  loadData() {}
+  loadData() {
+    if (this.gameId) {
+      this.apiService.getGame(this.gameId).subscribe(
+        data => this.game = data
+      );
+    }
+  }
 
-  async presentToast(msg: string) {
+  async presentToast(msg: string, color: string) {
     const toast = await this.toastCtrl.create({
       message: msg,
       duration: 1500,
       position: 'bottom',
-      color: 'success'
+      color: color
     });
     await toast.present();
   }
 
-  update() {}
+  update() {
+    if (this.gameId) {
+      const gameData: UpdateGame = {
+        title: this.title,
+        type: this.type,
+        cover: this.cover
+      }
+
+      this.apiService.updateGame(this.gameId, gameData).subscribe({
+        next: (res) => {
+          console.log('updated: ', res);
+          this.localizationService.translate(['TOAST_GAME_UPDATED']).subscribe(async (values) => {
+            this.router.navigate(['/games']).then(() => {
+              window.location.reload();
+            });
+            await this.presentToast(values['TOAST_GAME_UPDATED'], 'success');
+          })
+        },
+        error: (err) => console.error('error: ', err)
+      });
+    }
+  }
 }

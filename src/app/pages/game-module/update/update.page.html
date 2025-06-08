@@ -1,13 +1,35 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>update</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ game?.title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">update</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list>
+    <ion-item lines="full">
+      <ion-input label="{{ 'LABEL_TITLE' | translate }}*" labelPlacement="floating" [(ngModel)]="title" value="{{ game?.title }}" [counter]="true" maxlength="255" [clearInput]="true" debounce="500" inputmode="text" required="true"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-select label="{{ 'LABEL_TYPE' | translate }}*" label-placement="floating" value="{{ game?.type }}" [(ngModel)]="type" required="true">
+        <ion-select-option value="DLC/Expansion">{{ 'SELECT_TYPE_DLCEXPANSION' | translate }}</ion-select-option>
+        <ion-select-option value="Game">{{ 'SELECT_TYPE_GAME' | translate }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-input label="{{ 'LABEL_COVER' | translate }}" labelPlacement="floating" [(ngModel)]="cover" value="{{ game?.cover }}" [counter]="true" maxlength="255" [clearInput]="true" debounce="500" type="url" inputmode="url"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div class="ion-padding">
+    <ion-button expand="block" color="success" (click)="update()">
+      <ion-icon slot="start" name="save-sharp"></ion-icon>
+      {{ 'ACTION_SAVE' | translate }}
+    </ion-button>
+    <ion-button expand="block" color="medium" fill="outline" [routerLink]="['/games']" routerDirection="backward">
+      <ion-icon slot="start" name="close"></ion-icon>
+      {{ 'ACTION_CANCEL' | translate }}
+    </ion-button>
+  </div>
 </ion-content>
