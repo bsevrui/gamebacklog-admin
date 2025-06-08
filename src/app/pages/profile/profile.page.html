@@ -28,6 +28,13 @@
         </ion-label>
       </ion-item>
       <ion-item lines="full">
+        <ion-icon name="key" slot="start"></ion-icon>
+        <ion-label>
+          <h3>{{ 'LABEL_ROLE' | translate }}</h3>
+          <p>{{ currentUser?.role }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full">
         <ion-icon name="mail" slot="start"></ion-icon>
         <ion-label>
           <h3>{{ 'LABEL_EMAIL' | translate }}</h3>

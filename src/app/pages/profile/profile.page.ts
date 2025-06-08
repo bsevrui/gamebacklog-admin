@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/core/interfaces/user/user';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
-import { calendar, gift, mail, idCard } from 'ionicons/icons';
+import { calendar, gift, mail, idCard, key } from 'ionicons/icons';
 
 @Component({
   selector: 'app-profile',
@@ -26,7 +26,7 @@ export class ProfilePage implements OnInit {
     private storageService: StorageService,
     private router: Router
   ) {
-    addIcons({ mail, gift, calendar, idCard });
+    addIcons({ mail, gift, calendar, idCard, key });
   }
 
   async ngOnInit(): Promise<void> {
