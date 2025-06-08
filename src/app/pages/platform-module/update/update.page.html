@@ -1,13 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>update</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ platform?.name }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">update</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list>
+    <ion-item lines="full">
+      <ion-input label="{{ 'LABEL_NAME' | translate }}" labelPlacement="floating" [(ngModel)]="name" value="{{ platform?.name }}" [counter]="true" maxlength="75" [clearInput]="true" debounce="500" inputmode="text" required="true"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-textarea label="{{ 'LABEL_DETAIL' | translate }}" labelPlacement="floating" [(ngModel)]="detail" value="{{ platform?.detail }}" rows="5" [counter]="true" maxlength="255" debounce="500" inputmode="text" required="true"></ion-textarea>
+    </ion-item>
+  </ion-list>
+  <div class="ion-padding">
+    <ion-button expand="block" color="success" (click)="update()">
+      <ion-icon slot="start" name="save-sharp"></ion-icon>
+      {{ 'ACTION_SAVE' | translate }}
+    </ion-button>
+    <ion-button expand="block" color="medium" fill="outline" [routerLink]="['/platforms']" routerDirection="backward">
+      <ion-icon slot="start" name="close"></ion-icon>
+      {{ 'ACTION_CANCEL' | translate }}
+    </ion-button>
+  </div>
 </ion-content>
