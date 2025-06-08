@@ -9,6 +9,7 @@ import { User } from '../interfaces/user/user';
 import { UpdateUser } from '../interfaces/user/update-user';
 import { CreateGame } from '../interfaces/game/create-game';
 import { UpdateGame } from '../interfaces/game/update-game';
+import { UpdateGenre } from '../interfaces/genre/update-genre';
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +67,9 @@ export class ApiService {
     return this.http.get<Genre>(environment.apiBaseUrl+'genres/'+genreId);
   }
 
+  updateGenre(genreId: number, genreData: UpdateGenre) {
+    return this.http.patch(environment.apiBaseUrl+'genres/'+genreId, genreData);
+  }
 
   deleteGenre(genreId: number) {
     return this.http.delete(environment.apiBaseUrl+'genres/'+genreId);
