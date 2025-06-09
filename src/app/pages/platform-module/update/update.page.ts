@@ -79,7 +79,6 @@ export class UpdatePage implements OnInit {
 
       this.apiService.updatePlatform(this.platformId, platformData).subscribe({
         next: (res) => {
-          console.log('updated: ', res);
           this.localizationService.translate(['TOAST_PLATFORM_UPDATED']).subscribe(async (values) => {
             this.router.navigate(['/platforms']).then(() => {
               window.location.reload();
@@ -88,7 +87,6 @@ export class UpdatePage implements OnInit {
           })
         },
         error: async (err) => {
-          console.error('error: ', err);
           this.localizationService.translate(['WARNING_GENERIC', 'WARNING_PLATFORM_NAME_ALREADYREGISTERED']).subscribe(async (values) => {
             let errorMsg = values['WARNING_GENERIC'];
 

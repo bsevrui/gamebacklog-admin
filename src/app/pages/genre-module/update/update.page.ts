@@ -75,7 +75,6 @@ export class UpdatePage implements OnInit {
 
       this.apiService.updateGenre(this.genreId, genreData).subscribe({
         next: (res) => {
-          console.log('updated: ', res);
           this.localizationService.translate(['TOAST_GENRE_UPDATED']).subscribe(async (values) => {
             this.router.navigate(['/genres']).then(() => {
               window.location.reload();
@@ -84,7 +83,6 @@ export class UpdatePage implements OnInit {
           })
         },
         error: async (err) => {
-          console.error('error: ', err);
           this.localizationService.translate(['WARNING_GENERIC', 'WARNING_GENRE_NAME_ALREADYREGISTERED']).subscribe(async (values) => {
             let errorMsg = values['WARNING_GENERIC'];
 

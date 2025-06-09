@@ -87,7 +87,6 @@ export class UpdatePage implements OnInit {
 
       this.apiService.updateGame(this.gameId, gameData).subscribe({
         next: (res) => {
-          console.log('updated: ', res);
           this.localizationService.translate(['TOAST_GAME_UPDATED']).subscribe(async (values) => {
             this.router.navigate(['/games']).then(() => {
               window.location.reload();
@@ -96,7 +95,6 @@ export class UpdatePage implements OnInit {
           })
         },
         error: async (err) => {
-          console.error('error: ', err);
           this.localizationService.translate(['WARNING_GAME_TITLE_ALREADYREGISTERED', 'WARNING_GENERIC']).subscribe(async (values) => {
             let errorMsg = values['WARNING_GENERIC'];
             

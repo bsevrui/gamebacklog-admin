@@ -80,7 +80,6 @@ export class UpdatePage implements OnInit {
         profilePicture: this.profilePicture
       }).subscribe({
         next: (res) => {
-          console.log('updated: ', res);
           this.localizationService.translate(['TOAST_USER_UPDATED']).subscribe(async (values) => {
             this.router.navigate(['/users']).then(() => {
               window.location.reload();
