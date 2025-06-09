@@ -23,7 +23,9 @@ export class UpdatePage implements OnInit {
   private platformId?: number;
   public platform?: Platform;
   public name?: string;
+  public releaseDate?: Date;
   public detail?: string;
+  public picture?: string;
 
   /**
    * Constructor
@@ -66,5 +68,38 @@ export class UpdatePage implements OnInit {
     await toast.present();
   }
 
-  update() {}
+  update() {
+    if (this.platformId) {
+      const platformData: UpdatePlatform = {
+        name: this.name,
+        releaseDate: this.releaseDate,
+        detail: this.detail,
+        picture: this.picture
+      };
+
+      this.apiService.updatePlatform(this.platformId, platformData).subscribe({
+        next: (res) => {
+          console.log('updated: ', res);
+          this.localizationService.translate(['TOAST_PLATFORM_UPDATED']).subscribe(async (values) => {
+            this.router.navigate(['/platforms']).then(() => {
+              window.location.reload();
+            });
+            await this.presentToast(values['TOAST_PLATFORM_UPDATED'], 'success');
+          })
+        },
+        error: async (err) => {
+          console.error('error: ', err);
+          this.localizationService.translate(['WARNING_GENERIC', 'WARNING_PLATFORM_NAME_ALREADYREGISTERED']).subscribe(async (values) => {
+            let errorMsg = values['WARNING_GENERIC'];
+
+            if (err.status == 409) {
+              errorMsg = values['WARNING_PLATFORM_NAME_ALREADYREGISTERED'];
+            }
+
+            await this.presentToast(errorMsg, 'danger');
+          });
+        }
+      });
+    }
+  }
 }
