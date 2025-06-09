@@ -8,5 +8,28 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
+  <ion-list>
+    <ion-item lines="full">
+      <ion-input label="{{ 'LABEL_NAME' | translate }}*" labelPlacement="floating" [(ngModel)]="name" [counter]="true" maxlength="75" [clearInput]="true" debounce="500" inputmode="text" required="true"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-input label="{{ 'LABEL_RELEASEDATE' | translate }}*" labelPlacement="floating" [(ngModel)]="releaseDate" [clearInput]="true" debounce="500" type="date" required="true"></ion-input>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-textarea label="{{ 'LABEL_DETAIL' | translate }}" labelPlacement="floating" [(ngModel)]="detail" rows="5" [counter]="true" maxlength="255" debounce="500" inputmode="text"></ion-textarea>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-input label="{{ 'LABEL_PICTURE' | translate }}" labelPlacement="floating" [(ngModel)]="picture" [counter]="true" maxlength="255" [clearInput]="true" debounce="500" type="url" inputmode="url"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div class="ion-padding">
+    <ion-button expand="block" color="success" (click)="create()">
+      <ion-icon slot="start" name="save-sharp"></ion-icon>
+      {{ 'ACTION_SAVE' | translate }}
+    </ion-button>
+    <ion-button expand="block" color="medium" fill="outline" [routerLink]="['/platforms']" routerDirection="backward">
+      <ion-icon slot="start" name="close"></ion-icon>
+      {{ 'ACTION_CANCEL' | translate }}
+    </ion-button>
+  </div>
 </ion-content>
