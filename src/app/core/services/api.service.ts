@@ -11,6 +11,7 @@ import { CreateGame } from '../interfaces/game/create-game';
 import { UpdateGame } from '../interfaces/game/update-game';
 import { UpdateGenre } from '../interfaces/genre/update-genre';
 import { CreateGenre } from '../interfaces/genre/create-genre';
+import { UpdatePlatform } from '../interfaces/platform/update-platform';
 
 @Injectable({
   providedIn: 'root'
@@ -69,7 +70,7 @@ export class ApiService {
   }
 
   createGenre(genreData: CreateGenre): Observable<any> {
-    return this.http.post(environment.apiBaseUrl+'genres/', genreData);
+    return this.http.post(environment.apiBaseUrl+'genres', genreData);
   }
 
   updateGenre(genreId: number, genreData: UpdateGenre) {
@@ -95,6 +96,10 @@ export class ApiService {
    */
   getPlatform(platformId: number): Observable<Platform> {
     return this.http.get<Platform>(environment.apiBaseUrl+'platforms/'+platformId);
+  }
+
+  updatePlatform(platformId: number, platformData: UpdatePlatform) {
+    return this.http.patch(environment.apiBaseUrl+'platforms/'+platformId, platformData);
   }
 
   deletePlatform(platformId: number) {
