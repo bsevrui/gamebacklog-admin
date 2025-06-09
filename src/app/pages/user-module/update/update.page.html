@@ -30,7 +30,7 @@
       </ion-select>
     </ion-item>
     <ion-item lines="full">
-      <ion-input label="{{ 'LABEL_BIRTHDATE' | translate }}" labelPlacement="floating" [(ngModel)]="birthdate" value="{{ user?.birthdate }}" [counter]="true" [clearInput]="true" debounce="500" type="date" required="true"></ion-input>
+      <ion-input label="{{ 'LABEL_BIRTHDATE' | translate }}" labelPlacement="floating" [(ngModel)]="birthdate" value="{{ user?.birthdate }}" [clearInput]="true" debounce="500" type="date" required="true"></ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-input label="{{ 'LABEL_FIRSTNAME' | translate }}" labelPlacement="floating" [(ngModel)]="firstName" value="{{ user?.firstName }}" [counter]="true" maxlength="75" [clearInput]="true" debounce="500" inputmode="text"></ion-input>
